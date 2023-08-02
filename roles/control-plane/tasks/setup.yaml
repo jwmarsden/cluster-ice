@@ -1,0 +1,55 @@
+- name: Initialize Kubernetes Cluster
+  shell: kubeadm init --pod-network-cidr 192.168.1.0/16 --ignore-preflight-errors=NumCPU >> cluster_init.log
+  args:
+    chdir: $HOME
+    creates: cluster_init.log
+
+- name: Create .kube directory
+  file: 
+    path: $HOME/.kube
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+
+- name: Copy default cluster configuration
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: $HOME/.kube/config
+    remote_src: yes
+    owner: root
+    group: root
+    mode: 0660    
+
+- name: Change config mode
+  file:
+    path: $HOME/.kube/config
+    state: file
+    owner: root
+    group: root 
+    mode: 0660
+
+- name: Create .kube directory
+  file: 
+    path: $HOME/.kube
+    state: directory
+    owner: developer
+    group: developer
+    mode: 0775
+
+- name: Copy default cluster configuration
+  copy:
+    src: /etc/kubernetes/admin.conf
+    dest: $HOME/.kube/config
+    remote_src: yes
+    owner: developer
+    group: developer
+    mode: 0660    
+
+- name: Change config mode
+  file:
+    path: $HOME/.kube/config
+    state: file
+    owner: developer
+    group: developer 
+    mode: 0660

@@ -1,0 +1,13 @@
+- name: Download calico.yaml
+  ansible.builtin.get_url:
+    url: https://projectcalico.docs.tigera.io/manifests/calico.yaml
+    dest: /tmp/calico.yaml
+    owner: root
+    group: root
+    mode: "0777"
+
+- name: Setup calico
+  shell: kubectl apply -f /tmp/calico.yaml >> calico-apply.log
+  args: 
+    chdir: $HOME
+    creates: calico-apply.log

@@ -1,0 +1,25 @@
+- hosts: kubernetes
+  gather_facts: true
+  remote_user: developer
+  become: yes
+  become_user: root
+  roles:
+    - { role: common }
+    - { role: cri-o }
+    - { role: kubernetes }
+
+- hosts: control
+  gather_facts: true
+  remote_user: developer
+  become: yes
+  become_user: root
+  roles:
+    - { role: control-plane }
+
+- hosts: worker
+  gather_facts: true
+  remote_user: developer
+  become: yes
+  become_user: root
+  roles:
+    - { role: worker }

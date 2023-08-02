@@ -1,0 +1,16 @@
+all:
+  vars:
+    OS: xUbuntu_22.04
+    VERSION: 1.27
+    ansible_ssh_user: developer
+  children:
+    kubernetes:
+      children: 
+        control:
+          hosts:
+            192.168.0.180:
+        worker:
+          hosts:
+            192.168.0.181:
+            192.168.0.182:
+            192.168.0.183:
