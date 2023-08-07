@@ -31,7 +31,7 @@
 
 - name: Create .kube directory
   file: 
-    path: $HOME/.kube
+    path: /home/developer/.kube
     state: directory
     owner: developer
     group: developer
@@ -40,7 +40,7 @@
 - name: Copy default cluster configuration
   copy:
     src: /etc/kubernetes/admin.conf
-    dest: $HOME/.kube/config
+    dest: /home/developer/.kube/config
     remote_src: yes
     owner: developer
     group: developer
@@ -48,7 +48,7 @@
 
 - name: Change config mode
   file:
-    path: $HOME/.kube/config
+    path: /home/developer/.kube/config
     state: file
     owner: developer
     group: developer 
